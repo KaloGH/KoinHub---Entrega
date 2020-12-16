@@ -1,0 +1,45 @@
+| V | Objectes
+| V | Classes
+| X | Herència
+| V | Variables let i const
+| V | Arrays
+| V | Iterables
+| V | Funcions
+| V | Declaració de funció
+| V | Expressió de funció
+| V | Funcions autoinvocades
+| V | Funcions fletxa
+| V | Template literals
+| X | Objectes predefinits
+| V | Selectors
+| V | Modificar el nodes
+| V | Validació de formularis
+| X | Destructuring 
+| V | Closure
+| V | Registre d'events W3C
+| V | use strict
+| X | XMLhttpRequest
+| V | fetch
+| X | formData
+| V | Promises
+| V | JSON
+| V | Cookies i LocalStorage
+| V | Mòduls
+
+General:
+Hi haurà varies llistes de tots els valors que seran actualitzades en temps real entre el client i el servidor. 
+El Servidor generarà les fluctuacions del mercat de forma aleatòria.
+Els clients poden comprar i vendre accions o criptomonedes.
+Els clients tindran una vista personalitzada en funció de les accions que han comprat.
+Es mostraran gràfiques interactives amb dades obtingudes del servidor.
+Les taules seran interactives, ordenables per columnes i amb la possibiltat d’ocultar columnes o files.
+
+DWEC:
+
+Tota la web serà un SPA
+Obtindrà les dades del servidor cada cert temps i actualitzarà les gràfiques o taules.
+Els clients tindran un frontend general, un per a les seues accions.
+Els administradors poden gestionar els clients i les empreses i critomonedes que gestionen.
+Es guardarà en cookies les preferències dels clients en quant a visualització de les dades.
+
+CoinMarketCap API KEY => cbeb6b98-7a56-4e84-8bbc-56767733142d

@@ -1,0 +1,24 @@
+[
+    {
+        "userid": 1,
+        "username": "kalo",
+        "email": "kaloalku@gmail.com",
+        "password": "Vesprada123",
+        "balance": 1500,
+        "coins": [
+            "BTC",
+            "ETH"
+        ]
+    },
+    {
+        "userid": 2,
+        "username": "sergi",
+        "email": "sergi@gmail.com",
+        "password": "SergiDaw123",
+        "balance": 1500,
+        "coins": [
+            "BTC",
+            "ETH"
+        ]
+    }
+]

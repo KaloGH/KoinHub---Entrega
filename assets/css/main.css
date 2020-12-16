@@ -1,0 +1,41 @@
+#content{
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 100vh;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    color: white;
+
+}
+#content::-webkit-scrollbar{
+    display: none;
+}
+
+#divLogin{
+    color: white;
+}
+
+#navbarDropdownMenuLink{
+    padding-right: 7em;
+}
+
+.card{
+    color: #0F2027;
+    width: 50vw;
+    position: relative;
+    top: 10em;
+}
+
+#myChart{
+    width: .5px;
+    height: .5px;
+}
+
+.table{
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+*/
+}
