@@ -80,7 +80,7 @@ function register() {
 
 export { home }
 async function home() {
-    console.log(usuario);
+    utils.clearPage();
     const html = `<div class="container"><h1 class="display-1"><b>Bienvenido - ${usuario.getUsername()}</b></h1><br>
     <div class="container"><h1 class="display-3"><b>Su saldo actual es <span style="color: green" id="balance">${usuario.getBalance()}€</span></b></h1><br>
     <div class="container"><h1><b>A continuación puedes añadir más saldo a tu cuenta.</b></h1><br>
@@ -98,9 +98,9 @@ async function home() {
 
     mainDiv.appendChild(divHome);
 
-
     addListeners.navigation();
     addListeners.addSaldo();
+
 }
 //====================================================================================================
 //====================================================================================================
@@ -110,6 +110,7 @@ async function home() {
 //===================================== C O I N S ====================================================
 //====================================================================================================
 async function coins() {
+    utils.clearPage();
     const html = `<h1 class="display-1 text-center">Monedas</h1>`;
 
     const divTexto = document.createElement('div');
@@ -119,13 +120,14 @@ async function coins() {
 
     mainDiv.appendChild(divTexto);
 
-    
 
-        let coinsInfo = await cryptoInfo.coinsList();
+    // Recojo informacion del fetch
+    let coinsInfo = await cryptoInfo.coinsList();
 
-        let table = document.createElement('table');
-        table.classList.add('table');
-        let htmlCoin = `<thead class="thead-dark">
+    //Crear tabla con datos de las monedas
+    let table = document.createElement('table');
+    table.classList.add('table');
+    let htmlCoin = `<thead class="thead-dark">
         <tr>
           <th></th>
           <th>Nombre</th>
@@ -136,35 +138,47 @@ async function coins() {
           <th>Acciones</th>
         </tr>
       </thead><tbody>`;
-        for (let coin of coinsInfo) {
-            console.log(coin);
+    for (let coin of coinsInfo) {
+        new Promise((resolve) => {
+
             htmlCoin += `
-            <tr>
-            <td><img src="${coin.image}" height="50" width="50" heigth></img></td>
-                <th>${coin.name}</th>
-                <td>${coin.symbol}</td>
-                <td>${coin.current_price}€</td>
-                <td>${coin.total_volume}€</td>
-                <td>${coin.market_cap_rank}</td>
-                <td>
-                <a class="btn btn-outline-primary" data-coin="${coin.name}"> Comprar </a>
-                <a class="btn btn-outline-secondary"> Info </a>
-                </td>
-            </tr>`;
-              table.innerHTML += ``;
-        }
+                <tr>
+                <td><img src="${coin.image}" height="50" width="50" heigth></img></td>
+                    <th>${coin.name}</th>
+                    <td>${coin.symbol}</td>
+                    <td>${coin.current_price}€</td>
+                    <td>${coin.total_volume}€</td>
+                    <td>${coin.market_cap_rank}</td>
+                    <td>
+                    <a href="#" class="btn btn-outline-primary" data-coinBuy="${coin.name}"> Comprar </a>
+                    <a href="#" class="btn btn-outline-secondary" data-coin="${coin.name}"> Info </a>
+                    </td>
+                </tr>`;
+            table.innerHTML += ``;
+            resolve();
+        }).then(() => {
 
-        htmlCoin += `</tbody>`;
-        table.innerHTML = htmlCoin;
+            // Añado listener a todos los botones. Los separo en dos para poder controlar mejor lo que sucede.
+            // Boton de Info
+            document.querySelector(`[data-coin="${coin.name}"]`).addEventListener('click', (event) => {
+                //Lo convierto a string para sacar la mayoria de id's; El resto los ingresare manual.
+                showCoinInfo(convertNameToId((event.target.dataset.coin + "")));
 
-
-        mainDiv.appendChild(table);
-
-        for (let coin of coinsInfo) {
-            document.querySelector(`[data-coin="${coin.name}"]`).addEventListener('click',(event)=>{
-                console.log(event.target.dataset.coin); //FIXME: continuar con esto.
             });
-        }
+            //Boton de Compra
+            document.querySelector(`[data-coinBuy="${coin.name}"]`).addEventListener('click', (event) => {
+                //Lo convierto a string para sacar la mayoria de id's; El resto los ingresare manual.
+                console.log(event.target.dataset.coinbuy);
+                showBuy(convertNameToId((event.target.dataset.coinbuy + "")));
+
+            });
+        });
+    }
+
+    htmlCoin += `</tbody>`;
+    table.innerHTML = htmlCoin;
+    mainDiv.appendChild(table);
+
 
 }
 //====================================================================================================
@@ -172,8 +186,93 @@ async function coins() {
 //====================================================================================================
 
 //====================================================================================================
+//===================================== showBuy  ================================================
+//====================================================================================================
+function showBuy(idCoin) {
+    utils.clearPage();
+    let divBuy = document.createElement('div');
+
+    // Imprimo el html
+    new Promise((aprobar) => {
+        resolve();
+    });
+    // Espero que se resuelva esta promesa.
+
+}
+
+//====================================================================================================
+//====================================================================================================
+//====================================================================================================
+
+
+//====================================================================================================
+//===================================== showCoinInfo  ================================================
+//====================================================================================================
+
+async function showCoinInfo(idCoin) {
+
+
+
+    utils.clearPage();
+    let divInfoCoin = document.createElement('div');
+    let coinInfo = await cryptoInfo.infoAboutCoin(idCoin);
+
+    divInfoCoin.innerHTML = `<div class="jumbotron" style="background-color: #182E36">
+    <div class="container">
+        <img src="`+ coinInfo.image.large + `" class="mx-auto d-block"></img><br>
+      <h1 class="display-3">` + coinInfo.name + `</h1>
+      <p>`+ coinInfo.description.es + `</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Seguidores</h2>
+        <p>Twitter : 
+        `+ coinInfo.community_data.twitter_followers + ` </p>
+        <p>Reddit : 
+        `+ coinInfo.community_data.reddit_subscribers + ` </p>
+      </div>
+      <div class="col-md-4">
+        <h2>Links Oficiales</h2>
+        <p><a href=" 
+        `+ coinInfo.links.homepage[0] + `">` + coinInfo.links.homepage[0] + `
+        </a></p>
+        <p><a href=" 
+        `+ coinInfo.links.official_forum_url[0] + `">` + coinInfo.links.official_forum_url[0] + `
+        </a></p>
+        <p><a href=" 
+        `+ coinInfo.links.subreddit_url + `">` + coinInfo.links.subreddit_url + `
+        </a></p>
+        <p><a href=" 
+        `+ coinInfo.links.repos_url.github[0] + `">` + coinInfo.links.repos_url.github[0] + `
+        </a></p>
+        
+     </div>
+      <div class="col-md-4">
+        <h2>Votos</h2>
+        <p>Positivos <span class="text-info">`+ coinInfo.sentiment_votes_up_percentage + `%</span></p>
+        <p>Negativos <span class="text-danger">`+ coinInfo.sentiment_votes_down_percentage + `%</span></p>
+      </div>
+    </div>`;
+
+    mainDiv.appendChild(divInfoCoin);
+
+
+
+}
+
+//====================================================================================================
+//====================================================================================================
+//====================================================================================================
+
+
+//====================================================================================================
 //===================================== Listeners  ====================================================
 //====================================================================================================
+// Creo un objeto llamado addListeners con funciones para cada listener. Realmente lo uso en 3 ocasiones solo(todavia...)
 let addListeners = {
     login: async () => {
         // Get the forms we want to add validation styles to
@@ -247,6 +346,42 @@ let addListeners = {
 
     }
 }
+//====================================================================================================
+//====================================================================================================
+//====================================================================================================
+
+//====================================================================================================
+//================================== OTROS =======================================================
+//====================================================================================================
+// Funcion para convertir el nombre a id
+function convertNameToId(name) {
+    let idCoin = "";
+    switch (name) {
+
+        case "Binance Coin":
+            idCoin = "binancecoin";
+            break;
+        case "Bitcoin SV":
+            idCoin = "bitcoin-cash-sv";
+            break;
+        case "USD Coin":
+            idCoin = "usd-coin";
+            break;
+        case "XRP":
+            idCoin = "ripple";
+            break;
+        case "Bitcoin Cash":
+            idCoin = "bitcoin-cash";
+            break;
+
+        default:
+            idCoin = name.toLowerCase();
+            break;
+    }
+    return idCoin;
+}
+
+
 //====================================================================================================
 //====================================================================================================
 //====================================================================================================

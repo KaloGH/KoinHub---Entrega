@@ -17,4 +17,12 @@ class CryptoInfo {
                 .then(data => resolve(data));
         });
     }
+
+    infoAboutCoin(id) {
+        return new Promise(async (resolve) => {
+            await fetch('https://api.coingecko.com/api/v3/coins/' + id + '?market_data=true')
+                .then(res => res.json())
+                .then(data => resolve(data));
+        });
+    }
 }
