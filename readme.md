@@ -1,6 +1,7 @@
 Proyecto [Inacabado] de Kaloyan Emilov Kirov
 
 "Info"
+En /assets/json/users Puedes encontrar las credenciales para iniciar sesion.
 En la carpeta js (obvio) , estan todos los archivos de JS.
 En el archivo main esá el script principal que se ejecuta y redirige.
 En pages estan todas las vistas , una vez dentro se redirigen entre ellas.

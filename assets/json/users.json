@@ -4,21 +4,13 @@
         "username": "kalo",
         "email": "kaloalku@gmail.com",
         "password": "Vesprada123",
-        "balance": 1500,
-        "coins": [
-            "BTC",
-            "ETH"
-        ]
+        "balance": 1500
     },
     {
         "userid": 2,
-        "username": "sergi",
-        "email": "sergi@gmail.com",
-        "password": "SergiDaw123",
-        "balance": 1500,
-        "coins": [
-            "BTC",
-            "ETH"
-        ]
+        "username": "xxjcaxx",
+        "email": "xxjcaxx@gmail.com",
+        "password": "demoperro32",
+        "balance": 3000
     }
 ]

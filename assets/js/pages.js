@@ -290,7 +290,7 @@ let addListeners = {
 
         // Validacion si existe usuario
 
-        let users = await getJsonData('/assets/json/users.json');
+        let users = await getJsonData('./assets/json/users.json');
 
         document.body.querySelector('#loginForm').addEventListener('submit', (event) => {
             event.preventDefault();
